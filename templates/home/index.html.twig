@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ parent() }} - Accueil
+{% endblock %}
+
+{% block body %}
+
+    <div class="carousel slide" data-ride="carousel" id="carouselExampleControls" style="background-color: #aaa; text-align: center;">
+        <ol class="carousel-indicators">
+            {% for produit in produits %}
+                <li data-target="#carouselExampleIndicators" data-slide-to="{{ loop.index }}" {{ loop.first ? 'class="active"' : '' }}></li>
+            {% endfor %}
+        </ol>
+        <div class="carousel-inner">
+            {% for produit in produits %}
+                <div class="carousel-item {{ loop.first ? 'active' : '' }}">
+                    <a href="{{ path('produit_show', {'id': produit.id}) }}"><img src="{{ produit.image }}"/></a>
+                </div>
+            {% endfor %}
+        </div>
+        <a class="carousel-control-prev" data-slide="prev" href="#carouselExampleControls" role="button">
+            <span aria-hidden="true" class="carousel-control-prev-icon"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" data-slide="next" href="#carouselExampleControls" role="button">
+            <span aria-hidden="true" class="carousel-control-next-icon"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+    <div class="top-produit">
+        <h3>Top produits</h3>
+    </div>
+    {% endblock %}
