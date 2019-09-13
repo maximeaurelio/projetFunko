@@ -27,7 +27,6 @@
                         <a class="nav-link" href="{{ path('produit_index')}}">Liste des produits</a>
                     </li>
                 </ul>
-                
             </div>
             <div class="nav-bar-center" styles="text-align: center;">
             {{ render(controller(
@@ -44,6 +43,8 @@
                     <a class="btn btn-secondary" type="button" href="{{ path('app_register')}}">S'inscrire</a>
                 </div>
             {% endif %}
+            
+                <a href="{{ path('cart')}}">Panier</a>
             </div>
         </nav>
         {% block body %}{% endblock %}

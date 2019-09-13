@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre panier{% endblock %}
+
+{% block body %}
+
+    {% if app.session.get('cart') %}
+        {{ dump(app.session.get('cart')) }}
+    {% else %}
+        <h3>Votre panier est vide</h3>
+    {% endif %}
+
+{% endblock %}

@@ -24,7 +24,6 @@ class RegistrationFormType extends AbstractType
             ))
             ->add('nom')
             ->add('prenom')
-            ->add('date_naissance')
             ->add('adresse')
             ->add('ville')
             ->add('cp')
