@@ -15,9 +15,13 @@ class HomeController extends AbstractController
     public function index(ProduitRepository $produitRepository): Response
     {
         $pr = $produitRepository->getRandom();
+        $produitdesc = $produitRepository->findBy(array(), array('nb_vendu' => 'DESC'));
+
         
         return $this->render('home/index.html.twig', [
             'produits' => $pr,
+            'proddesc' => $produitdesc
+
         ]);
        
     }

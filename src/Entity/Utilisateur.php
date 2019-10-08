@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
-
+use Captcha\Bundle\CaptchaBundle\Validator\Constraints as CaptchaAssert;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -99,10 +99,24 @@ class Utilisateur implements UserInterface
      */
     private $plainPassword;
 
+    /**
+     * @CaptchaAssert\ValidCaptcha(
+     *      message = "CAPTCHA validation failed, try again."
+     * )
+     */
+    protected $captchaCode;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Annonce", mappedBy="utilisateur", orphanRemoval=true)
+     */
+    private $annonces;
+
+
 
     public function __construct()
     {
         $this->encherirs = new ArrayCollection();
+        $this->annonces = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -327,4 +341,47 @@ class Utilisateur implements UserInterface
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
     }
+
+
+
+  public function getCaptchaCode()
+  {
+    return $this->captchaCode;
+  }
+
+  public function setCaptchaCode($captchaCode)
+  {
+    $this->captchaCode = $captchaCode;
+  }
+
+  /**
+   * @return Collection|Annonce[]
+   */
+  public function getAnnonces(): Collection
+  {
+      return $this->annonces;
+  }
+
+  public function addAnnonce(Annonce $annonce): self
+  {
+      if (!$this->annonces->contains($annonce)) {
+          $this->annonces[] = $annonce;
+          $annonce->setUtilisateur($this);
+      }
+
+      return $this;
+  }
+
+  public function removeAnnonce(Annonce $annonce): self
+  {
+      if ($this->annonces->contains($annonce)) {
+          $this->annonces->removeElement($annonce);
+          // set the owning side to null (unless already changed)
+          if ($annonce->getUtilisateur() === $this) {
+              $annonce->setUtilisateur(null);
+          }
+      }
+
+      return $this;
+  }
 }

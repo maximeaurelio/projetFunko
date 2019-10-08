@@ -31,5 +31,9 @@
 
     <div class="top-produit">
         <h3>Top produits</h3>
+    {% for produit in proddesc %}
+        <a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a><br>
+    {% endfor %}
+
     </div>
     {% endblock %}
