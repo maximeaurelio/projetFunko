@@ -32,8 +32,16 @@
     <div class="top-produit">
         <h3>Top produits</h3>
     {% for produit in proddesc %}
-        <a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a><br>
+        <div class="hover_img">
+            <div class="hover">
+                <img src="https://image.noelshack.com/fichiers/2019/41/3/1570606514-camera.png"; height= "25" width= "28" >
+                <span>
+                    <img src="{{ produit.image }}";>
+                </span>
+                <a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }}</a>
+            </div>
+        </div>
     {% endfor %}
-
     </div>
+
     {% endblock %}

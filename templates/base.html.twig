@@ -7,7 +7,13 @@
             {% block title %}Funko Market{% endblock %}
         </title>
         {% block stylesheets %}
-
+        <style>
+        *{box-sizing: border-box; }
+        .hover_img .hover { position:relative;}
+        .hover_img .hover span { position:absolute; display:none; z-index:99; }
+        .hover_img .hover:hover span { display:block; }
+        a { color:#21007f; font-weight:bold;} 
+        </style>
         {% endblock %}
     </head>
     <body>
@@ -32,7 +38,6 @@
             {{ render(controller(
                 'App\\Controller\\SearchController::searchBar'
             ))}}
-               
             {% if app.user %}
                 <div aria-label="Basic example" class="btn-group" role="group">
                     <a class="btn btn-secondary" type="button" href="{{ path('app_logout')}}">Deconnexion</a>
@@ -43,7 +48,6 @@
                     <a class="btn btn-secondary" type="button" href="{{ path('app_register')}}">S'inscrire</a>
                 </div>
             {% endif %}
-            
                 <a href="{{ path('cart')}}">Panier</a>
             </div>
         </nav>

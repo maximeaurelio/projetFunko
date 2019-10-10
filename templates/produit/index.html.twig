@@ -8,28 +8,25 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
                 <th>Nom</th>
-                <th>Numero</th>
-                <th>Taille</th>
                 <th>Exclusive</th>
                 <th>Annee</th>
-                <th>Image</th>
-                <th>actions</th>
             </tr>
         </thead>
         <tbody>
         {% for produit in produits %}
             <tr>
-                <td>{{ produit.id }}</td>
-                <td>{{ produit.nom }}</td>
-                <td>{{ produit.numero }}</td>
-                <td>{{ produit.taille }}</td>
-                <td>{{ produit.exclusive ? 'Yes' : 'No' }}</td>
-                <td>{{ produit.annee }}</td>
-                <td>{{ produit.image }}</td>
                 <td>
-                    <a href="{{ path('produit_show', {'id': produit.id}) }}">show</a>
+                    <div class="hover_img">
+                        <div class="hover"><img src="https://image.noelshack.com/fichiers/2019/41/3/1570606514-camera.png"; height= "25" width= "28" ><span>
+                        <img src="{{ produit.image }}"; height= "250" width= "250"></span>
+                        </div>
+                        <a href="{{ path('produit_show', {'id': produit.id}) }}">{{ produit.nom }} # {{ produit.numero }}</a>
+                    </div>
+                </td>
+                <td>{{ produit.exclusive ? 'Oui' : 'Non' }}</td>
+                <td>{{ produit.annee }}</td>
+                <td>
                     <a href="{{ path('produit_edit', {'id': produit.id}) }}">edit</a>
                 </td>
             </tr>
